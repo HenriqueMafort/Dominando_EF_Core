@@ -20,7 +20,7 @@ namespace Curso
             //ForcandoMigracoes();
             //RecuperandoMigracoesEmTempoDeExecucao();
             //RecuperarMigracoesNoBancoDeDados();
-            //GerarScriptGeralDoBancoDeDados();
+            GerarScriptGeralDoBancoDeDados();
         }
         public static void GapDoEnsureCreated() // Cria um banco de dados forcadamente
         {
