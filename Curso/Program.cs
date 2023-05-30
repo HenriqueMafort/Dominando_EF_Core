@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Curso.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -8,6 +10,8 @@ namespace Curso
 {
     class Program
     {
+
+
         static void Main(string[] args)
         {
             //GapDoEnsureCreated();
@@ -20,7 +24,10 @@ namespace Curso
             //ForcandoMigracoes();
             //RecuperandoMigracoesEmTempoDeExecucao();
             //RecuperarMigracoesNoBancoDeDados();
-            GerarScriptGeralDoBancoDeDados();
+            //GerarScriptGeralDoBancoDeDados();
+            ///CarregamentoAdiantado();
+            //CarregamentoExplicito();
+            CarremantoLento();
         }
         public static void GapDoEnsureCreated() // Cria um banco de dados forcadamente
         {
@@ -197,6 +204,144 @@ namespace Curso
             var script = db.Database.GenerateCreateScript(); // gera o script todo do banco de dados e devolve na variavel "script"
 
             Console.WriteLine(script);
+
+        }
+
+        static void CarregamentoAdiantado()
+        {
+            using var db = new Curso.Domain.ApplicationContext(); //criando objeto db usando instancia do ApplicationContext
+            SetupTiposCarregamentos(db); // metodo criado a parte para ....
+
+            var departamentos = db //o departamentos vai receber dados do banco de dados usando o Include() que é uma função do EFCore que agiliza as consultas
+            .Departamentos
+            .Include(p => p.Funcionarios);// aqui esta usando  lambda para puxar os dados dos Funcionarios 
+
+            foreach (var departamento in departamentos) // foreach para varrer os dados que encontrou dentro do departamentos
+            {
+                Console.WriteLine("--------------------------------");
+                Console.WriteLine($"Departamento:{departamento.Descricao}"); // aqui ele irá escrever os departamentos que encontrou descrição dos departamentos
+
+                if (departamento.Funcionarios?.Any() ?? false) // verifica se existe algum funcionario e se for verdadeiro entra em IF
+                {
+                    foreach (var funcionario in departamento.Funcionarios)  //varre os funcinarios caso seja verdadeiro
+                        Console.WriteLine($"\tFuncionario:{funcionario.Nome}");
+                }
+                else
+                {
+                    Console.WriteLine($"\tnenhum funcionario encontrado"); //escreve no console que não encontrou nenhum funcionario
+                }
+            }
+
+        }
+
+        static void SetupTiposCarregamentos(Curso.Domain.ApplicationContext db)
+        {
+            if (!db.Departamentos.Any()) //se os departamento dentro de db for true então
+            {
+                db.Departamentos.AddRange(//irá adicionar em memória os dados que irei escrever a baixo para depois se necesario usar o SaveChange para persistir dentro do banco de dados
+
+                new Curso.Domain.Departamento//Estou criando um novo Departamento
+                {
+                    Descricao = "Departamento 01", // Criação de departamento Novo
+                    Funcionarios = new System.Collections.Generic.List<Curso.Domain.Funcionario> // Criando uma nova instancia de uma lista vazia e atribuindo a propriedade Funcionarios
+                    {
+                        new Funcionario // dizendo que será um novo funcionario e a baixo está todos os dados do empregado
+                        {
+                            Nome = "Henrique Mafort",
+                            CPF = "11111111111",
+                            RG = "130493696"
+                        }
+                    }
+                },
+                new Curso.Domain.Departamento // novamente está criando um novo Departamento
+                {
+                    Descricao = "Departamento 02", // Com novo nome
+                    Funcionarios = new System.Collections.Generic.List<Curso.Domain.Funcionario> // Nova instancia vazia e dados a baixo desse Funcionario
+                    {
+                    new Funcionario{// Está sendo cadastrado novo FUncionario dentro da lista Funcionario para Funcionarios
+                    Nome = "Carlos Rocha",
+                    CPF = "111111111111",
+                    RG = "131111111"
+                    },
+                    new Funcionario{
+                        Nome = "Henrique Rocha",
+                        CPF = "1111111112222",
+                        RG = "122229384"
+                        }
+                    }
+                }
+                );
+                db.SaveChanges();//metodo onde persiste as informações dentro do banco de dados
+                db.ChangeTracker.Clear(); // usado para limpar as alterações que estão em memoria. Com isso ele retorna a todas as informações que foram buscados em banco de dados.
+            }
+        }
+    
+        //-----------------------------------------
+        //Carregamento Explicito;
+
+        static void CarregamentoExplicito()
+        {
+            using var db = new Curso.Domain.ApplicationContext(); //criando objeto db usando instancia do ApplicationContext
+            SetupTiposCarregamentos(db); // metodo criado a parte para ....
+
+            var departamentos = db //o departamentos vai receber dados do banco de dados usando o Include() que é uma função do EFCore que agiliza as consultas
+            .Departamentos
+            .ToList();// executa varias consultas na base de dados simultaneamente;
+            // aqui esta usando  lambda para puxar os dados dos Funcionarios 
+
+            foreach (var departamento in departamentos) // foreach para varrer os dados que encontrou dentro do departamentos
+            {
+            if (departamento.Id == 2)
+            {
+                //db.Entry(departamento).Collection(p => p.Funcionarios).Load(); //Collection identifica qual propriedade de navegação queremos que o EF core preencha os dados Load() = executa novo comando na base de dados e ira materializar os dados na propriedade Funcionarios
+                db.Entry(departamento).Collection(p => p.Funcionarios).Query().Where(p => p.Id > 2).ToList(); // adiciona um filtro dentro da consulta trazendo somente os Ids maiores que 2.
+            }
+                Console.WriteLine("--------------------------------");
+                Console.WriteLine($"Departamento:{departamento.Descricao}"); // aqui ele irá escrever os departamentos que encontrou descrição dos departamentos
+
+                if (departamento.Funcionarios?.Any() ?? false) // verifica se existe algum funcionario e se for verdadeiro entra em IF
+                {
+                    foreach (var funcionario in departamento.Funcionarios)  //varre os funcinarios caso seja verdadeiro
+                        Console.WriteLine($"\tFuncionario:{funcionario.Nome}");
+                }
+                else
+                {
+                    Console.WriteLine($"\tnenhum funcionario encontrado"); //escreve no console que não encontrou nenhum funcionario
+                }
+            }
+
+        }
+
+
+        //---------------- Carregamento Lento ------------------------ "Pouco Usado"
+        //Aqui ele faz uma consulta para cada foreach... para cada departamento ele iria abrir uma conexão para fazer uma consulta
+            static void CarremantoLento()
+        {
+            using var db = new Curso.Domain.ApplicationContext(); //criando objeto db usando instancia do ApplicationContext
+            SetupTiposCarregamentos(db); // metodo criado a parte para ....
+
+            //db.ChangeTracker.LazyLoadingEnabled = false;
+
+            var departamentos = db //o departamentos vai receber dados do banco de dados usando o Include() que é uma função do EFCore que agiliza as consultas
+            .Departamentos
+            .ToList();// executa varias consultas na base de dados simultaneamente;
+            // aqui esta usando  lambda para puxar os dados dos Funcionarios 
+
+            foreach (var departamento in departamentos) // foreach para varrer os dados que encontrou dentro do departamentos
+            {
+                Console.WriteLine("--------------------------------");
+                Console.WriteLine($"Departamento:{departamento.Descricao}"); // aqui ele irá escrever os departamentos que encontrou descrição dos departamentos
+
+                if (departamento.Funcionarios?.Any() ?? false) // verifica se existe algum funcionario e se for verdadeiro entra em IF
+                {
+                    foreach (var funcionario in departamento.Funcionarios)  //varre os funcinarios caso seja verdadeiro
+                        Console.WriteLine($"\tFuncionario:{funcionario.Nome}");
+                }
+                else
+                {
+                    Console.WriteLine($"\tnenhum funcionario encontrado"); //escreve no console que não encontrou nenhum funcionario
+                }
+            }
 
         }
     }

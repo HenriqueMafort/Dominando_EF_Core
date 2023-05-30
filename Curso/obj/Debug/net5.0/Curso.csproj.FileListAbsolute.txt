@@ -67,3 +67,5 @@ Z:\Curso Desenvolvedor.io\Dominando_EF_Core\Curso\obj\Debug\net5.0\Curso.genrunt
 Z:\Curso Desenvolvedor.io\Dominando_EF_Core\Curso\obj\Debug\net5.0\ref\Curso.dll
 Z:\Curso Desenvolvedor.io\Dominando_EF_Core\Curso\bin\Debug\net5.0\Humanizer.dll
 Z:\Curso Desenvolvedor.io\Dominando_EF_Core\Curso\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+Z:\Curso Desenvolvedor.io\Dominando_EF_Core\Curso\bin\Debug\net5.0\Castle.Core.dll
+Z:\Curso Desenvolvedor.io\Dominando_EF_Core\Curso\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Proxies.dll

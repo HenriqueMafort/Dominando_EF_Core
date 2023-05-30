@@ -14,7 +14,9 @@ namespace Curso.Domain
             const string strConnection = "Server=localhost; Database=C002; Trusted_Connection=True; TrustServerCertificate=True;";
             optionsbuilder.UseSqlServer(strConnection)
             .EnableSensitiveDataLogging()
+            //.UseLazyLoadingProxies()
             .LogTo(Console.WriteLine, LogLevel.Information);
+            
         }
     }
 }

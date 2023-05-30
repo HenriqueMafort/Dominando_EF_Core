@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Curso.Domain
 {
@@ -8,7 +9,21 @@ namespace Curso.Domain
         public string Descricao { get; set; }
         public bool Ativo { get; set; }
 
+        public Departamento()
+        {
 
-        public List<Funcionario> Funcionarios { get; set; }
+        }
+        private ILazyLoader _lazyLoader {get;set;}
+        private Departamento (ILazyLoader lazeLoader)
+        {
+            _lazyLoader = lazeLoader;
+        }
+        private List<Funcionario> _funcionarios;
+        public virtual List<Funcionario> Funcionarios 
+        {
+            get => _lazyLoader.Load(this, ref _funcionarios);
+            set => _funcionarios = value;
+        }
+
     }
 }
