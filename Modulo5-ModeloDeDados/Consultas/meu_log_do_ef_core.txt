@@ -1,0 +1,81 @@
+info: 13/06/2023 08:35:49.579 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 5.0.0 initialized 'ApplicationContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+dbug: 13/06/2023 08:35:49.911 CoreEventId.QueryCompilationStarting[10111] (Microsoft.EntityFrameworkCore.Query) 
+      Compiling query expression: 
+      'DbSet<Departamento>()
+          .Where(p => p.Id > 0)'
+dbug: 13/06/2023 08:35:50.093 CoreEventId.QueryExecutionPlanned[10107] (Microsoft.EntityFrameworkCore.Query) 
+      Generated query execution expression: 
+      'queryContext => new SingleQueryingEnumerable<Departamento>(
+          (RelationalQueryContext)queryContext, 
+          RelationalCommandCache.SelectExpression(
+              Projection Mapping:
+                  EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: Departamento.Id (int) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: Departamento.Ativo (bool) Required, 1], [Property: Departamento.Descricao (string), 2], [Property: Departamento.Excluido (bool) Required, 3], }
+              SELECT d.Id, d.Ativo, d.Descricao, d.Excluido
+              FROM Departamentos AS d
+              WHERE d.Id > 0), 
+          Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, Departamento>, 
+          Curso.Data.ApplicationContext, 
+          False, 
+          False
+      )'
+dbug: 13/06/2023 08:35:50.153 RelationalEventId.CommandCreating[20103] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Creating DbCommand for 'ExecuteReader'.
+dbug: 13/06/2023 08:35:50.159 RelationalEventId.CommandCreated[20104] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Created DbCommand for 'ExecuteReader' (33ms).
+dbug: 13/06/2023 08:35:50.162 RelationalEventId.ConnectionOpening[20000] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opening connection to database 'ConsultasDB' on server 'localhost'.
+dbug: 13/06/2023 08:35:50.660 RelationalEventId.ConnectionOpened[20001] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Opened connection to database 'ConsultasDB' on server 'localhost'.
+dbug: 13/06/2023 08:35:50.664 RelationalEventId.CommandExecuting[20100] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [d].[Id], [d].[Ativo], [d].[Descricao], [d].[Excluido]
+      FROM [Departamentos] AS [d]
+      WHERE [d].[Id] > 0
+info: 13/06/2023 08:35:50.687 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (24ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [d].[Id], [d].[Ativo], [d].[Descricao], [d].[Excluido]
+      FROM [Departamentos] AS [d]
+      WHERE [d].[Id] > 0
+dbug: 13/06/2023 08:35:50.717 CoreEventId.StartedTracking[10806] (Microsoft.EntityFrameworkCore.ChangeTracking) 
+      Context 'ApplicationContext' started tracking 'Departamento' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+dbug: 13/06/2023 08:35:50.744 CoreEventId.StartedTracking[10806] (Microsoft.EntityFrameworkCore.ChangeTracking) 
+      Context 'ApplicationContext' started tracking 'Departamento' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+dbug: 13/06/2023 08:35:50.744 CoreEventId.StartedTracking[10806] (Microsoft.EntityFrameworkCore.ChangeTracking) 
+      Context 'ApplicationContext' started tracking 'Departamento' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+dbug: 13/06/2023 08:35:50.748 RelationalEventId.DataReaderDisposing[20300] (Microsoft.EntityFrameworkCore.Database.Command) 
+      A data reader was disposed.
+dbug: 13/06/2023 08:35:50.750 RelationalEventId.ConnectionClosing[20002] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closing connection to database 'ConsultasDB' on server 'localhost'.
+dbug: 13/06/2023 08:35:50.754 RelationalEventId.ConnectionClosed[20003] (Microsoft.EntityFrameworkCore.Database.Connection) 
+      Closed connection to database 'ConsultasDB' on server 'localhost'.
+dbug: 13/06/2023 08:35:50.755 CoreEventId.ContextDisposed[10407] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      'ApplicationContext' disposed.
+info: 13/06/2023 08:38:52.352 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 5.0.0 initialized 'ApplicationContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+info: 13/06/2023 08:38:53.593 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (22ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [d].[Id], [d].[Ativo], [d].[Descricao], [d].[Excluido]
+      FROM [Departamentos] AS [d]
+      WHERE [d].[Id] > 0
+info: 13/06/2023 09:17:38.103 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 5.0.0 initialized 'ApplicationContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+info: 13/06/2023 09:17:39.939 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (50ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [d].[Id], [d].[Ativo], [d].[Descricao], [d].[Excluido]
+      FROM [Departamentos] AS [d]
+      WHERE [d].[Id] > 0
+fail: 13/06/2023 09:17:40.065 CoreEventId.QueryIterationFailed[10100] (Microsoft.EntityFrameworkCore.Query) 
+      An exception occurred while iterating over the results of a query for context type 'Curso.Data.ApplicationContext'.
+      System.InvalidCastException: Unable to cast object of type 'System.Boolean' to type 'System.Int32'.
+         at Microsoft.Data.SqlClient.SqlBuffer.get_Int32()
+         at Microsoft.Data.SqlClient.SqlDataReader.GetInt32(Int32 i)
+         at lambda_method5(Closure , QueryContext , DbDataReader , ResultContext , SingleQueryResultCoordinator )
+         at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+info: 13/06/2023 09:27:25.122 CoreEventId.ContextInitialized[10403] (Microsoft.EntityFrameworkCore.Infrastructure) 
+      Entity Framework Core 5.0.0 initialized 'ApplicationContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+info: 13/06/2023 09:27:26.380 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command) 
+      Executed DbCommand (49ms) [Parameters=[@__descricao_0='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+      SELECT [d].[Id], [d].[Ativo], [d].[Descricao], [d].[Excluido]
+      FROM [Departamentos] AS [d]
+      WHERE [d].[Descricao] = @__descricao_0
