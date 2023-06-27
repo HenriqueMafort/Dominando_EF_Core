@@ -6061,6 +6061,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "Microsoft.EntityFrameworkCore >= 5.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.0",
       "Microsoft.EntityFrameworkCore.inMemory >= 5.0.0",
@@ -6074,11 +6075,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "Z:\\Curso Desenvolvedor.io\\Dominando_EF_Core\\Modulo4-Infraestrutura\\Consultas\\Consultas.csproj",
+      "projectUniqueName": "Z:\\Curso Desenvolvedor.io\\Dominando_EF_Core\\Modulo5-ModeloDeDados\\ModeloDeDados\\Consultas.csproj",
       "projectName": "Consultas",
-      "projectPath": "Z:\\Curso Desenvolvedor.io\\Dominando_EF_Core\\Modulo4-Infraestrutura\\Consultas\\Consultas.csproj",
+      "projectPath": "Z:\\Curso Desenvolvedor.io\\Dominando_EF_Core\\Modulo5-ModeloDeDados\\ModeloDeDados\\Consultas.csproj",
       "packagesPath": "C:\\Users\\carlos.rocha\\.nuget\\packages\\",
-      "outputPath": "Z:\\Curso Desenvolvedor.io\\Dominando_EF_Core\\Modulo4-Infraestrutura\\Consultas\\obj\\",
+      "outputPath": "Z:\\Curso Desenvolvedor.io\\Dominando_EF_Core\\Modulo5-ModeloDeDados\\ModeloDeDados\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -6110,6 +6111,10 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[5.0.0, )"
+          },
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",

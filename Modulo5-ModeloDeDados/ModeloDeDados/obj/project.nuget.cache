@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ba354tjZYmzl7DGop/wO3YXWsVYTK+0oe6LcbHgNdzILcyhMBJX8KwXbF12UNkjWDNBIDThuXfMw7NaublCudg==",
+  "dgSpecHash": "RZWE6fjF350XFf/XepHQ2831vWvmKQ5z7v+XT2CYBbevTsdX5jb8gzhcgzc7MV2fsLkqP7Eu8/1jQNCmylM2jg==",
   "success": true,
-  "projectFilePath": "Z:\\Curso Desenvolvedor.io\\Dominando_EF_Core\\Modulo4-Infraestrutura\\Consultas\\Consultas.csproj",
+  "projectFilePath": "Z:\\Curso Desenvolvedor.io\\Dominando_EF_Core\\Modulo5-ModeloDeDados\\ModeloDeDados\\Consultas.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\carlos.rocha\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\carlos.rocha\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
