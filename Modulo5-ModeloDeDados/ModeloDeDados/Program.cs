@@ -162,6 +162,8 @@ namespace Consultas
                 Console.WriteLine($"estado: {estado}, Governador: {est.Governador.Nome}")
             );
         }
+    
+        
     }
 }
 
