@@ -181,6 +181,8 @@ namespace Consultas
 
                 db.Estados.Add(estado);
                 db.SaveChanges();
+
+
             }
             using (var db = new Curso.Data.ApplicationContext())
             {
@@ -190,17 +192,16 @@ namespace Consultas
 
                 db.SaveChanges();
 
-                foreach (var est in db.Estados.AsNoTracking())
+                foreach (var est in estados)
                 {
-                    Console.WriteLine($"Estado: {est.Nome}, Governador: {est.Governador.Nome}");
+                    Console.WriteLine($"Estado: {est.Cidades}, Cidades{est.Governador.Nome}");
 
                     foreach (var cidade in est.Cidades)
                     {
-                        Console.WriteLine($"\tCidade: {cidade.Nome}");
+                        Console.WriteLine($"t/Cidade: {cidade.Nome}");
                     }
                 }
             }
-
         }
     }
 }
