@@ -11,7 +11,8 @@ namespace Consultas
     {
         static void Main(string[] args)
         {
-            Relacionamento1Para1();
+            Relacionamento1ParaMuitos();
+            //Relacionamento1Para1();
             //TiposDePropriedades();
             //TrabalhandoComPropriedadesDeSombra();
             //PropriedadesDeSombra();
@@ -162,8 +163,45 @@ namespace Consultas
                 Console.WriteLine($"estado: {estado}, Governador: {est.Governador.Nome}")
             );
         }
-    
-        
+
+        static void Relacionamento1ParaMuitos()
+        {
+            using (var db = new Curso.Data.ApplicationContext())
+            {
+                db.Database.EnsureDeleted();
+                db.Database.EnsureCreated();
+
+                var estado = new Estado
+                {
+                    Nome = "Paraná",
+                    Governador = new Governador { Nome = "Carlos Alberto de Nobrega" }
+                };
+
+                estado.Cidades.Add(new Cidade { Nome = "Toledo" });
+
+                db.Estados.Add(estado);
+                db.SaveChanges();
+            }
+            using (var db = new Curso.Data.ApplicationContext())
+            {
+                var estados = db.Estados.ToList();
+
+                estados[0].Cidades.Add(new Cidade { Nome = "Cascavel" });
+
+                db.SaveChanges();
+
+                foreach (var est in db.Estados.AsNoTracking())
+                {
+                    Console.WriteLine($"Estado: {est.Nome}, Governador: {est.Governador.Nome}");
+
+                    foreach (var cidade in est.Cidades)
+                    {
+                        Console.WriteLine($"\tCidade: {cidade.Nome}");
+                    }
+                }
+            }
+
+        }
     }
 }
 

@@ -15,8 +15,8 @@ namespace Curso.Configuration
 
 
             builder.Navigation(p => p.Governador).AutoInclude();
+            builder.Navigation(p => p.Cidades).AutoInclude();
 
-            
         }
     }
 }

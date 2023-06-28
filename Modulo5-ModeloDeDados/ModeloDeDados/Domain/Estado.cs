@@ -9,7 +9,7 @@ namespace Curso.Data
 
         public Governador Governador { get; set; }
 
-        public ICollection<Cidade> Cidades { get; } = new List<Cidade>();
+        public ICollection<Cidade> Cidades { get; } = new List<Cidade>(); //essa collection diz que o estados tera uma lista de cidades dentro dele
     }
 
     public class Governador
