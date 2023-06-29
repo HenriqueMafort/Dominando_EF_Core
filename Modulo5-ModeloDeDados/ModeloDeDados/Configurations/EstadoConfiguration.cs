@@ -17,6 +17,10 @@ namespace Curso.Configuration
             builder.Navigation(p => p.Governador).AutoInclude();
             builder.Navigation(p => p.Cidades).AutoInclude();
 
+            builder
+            .HasMany(p => p.Cidades)
+            .WithOne(p => p.Estado)
+            //.OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
