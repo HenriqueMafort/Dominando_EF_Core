@@ -11,7 +11,7 @@ namespace Consultas
     {
         static void Main(string[] args)
         {
-            Relacionamento1ParaMuitos();
+            //Relacionamento1ParaMuitos();
             //Relacionamento1Para1();
             //TiposDePropriedades();
             //TrabalhandoComPropriedadesDeSombra();

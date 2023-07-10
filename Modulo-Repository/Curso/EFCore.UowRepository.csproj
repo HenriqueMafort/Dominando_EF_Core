@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MICROSOFT.ASPNETCORE.mvc.newtonsoftJson" Version="5.0" />
     <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>

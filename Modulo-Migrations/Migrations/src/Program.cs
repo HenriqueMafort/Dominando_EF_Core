@@ -56,6 +56,16 @@ namespace Migrations
                 db.Pessoas.Remove(p1);
                 db.SaveChanges();      
         }
+
+        static void AdicionarCarro()
+        {
+            var newCarro = new Carro(
+            {
+                CarroId = 1,
+
+            }
+        );
+        }
     }
     
 }

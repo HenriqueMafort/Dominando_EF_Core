@@ -12,7 +12,7 @@ namespace Consultas
         {
             //FiltroGlobal();
             //IgnoreFiltroGlobal();
-            //AtualizaDado();
+            AtualizaDado();
             //ConsultasProjetadas();
             //ConsultaParametrizada();
             //ConsultaComTag();

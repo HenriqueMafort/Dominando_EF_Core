@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Data;
+using Data.Repositories;
+using Domain;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,8 +30,14 @@ namespace EfCo.UowRepository
         
         public void ConfigureServices(IServiceCollection services)
         {
+            //iniciando projeto
+            services.AddControllers()
+            .AddNewtonsoftJson(options => 
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+            services.AddMvc();
 
-            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EfCo.UowRepository", Version = "v1" });
@@ -37,6 +45,8 @@ namespace EfCo.UowRepository
             //String de conexão
             var srtConnection = "Server=localhost; Database=UoW; Trusted_Connection=True; TrustServerCertificate=True;";
             services.AddDbContext<ApplicationContext>(p =>p.UseSqlServer(srtConnection));
+
+            services.AddScoped<IDepartamentoRepository, DepartamentoRepository>();
         }
 
         
@@ -59,6 +69,30 @@ namespace EfCo.UowRepository
             {
                 endpoints.MapControllers();
             });
+        }
+        private void InializarBaseDeDados(IApplicationBuilder app)
+        {
+            using var db = app
+            .ApplicationServices
+            .CreateScope()
+            .ServiceProvider
+            .GetRequiredService<ApplicationContext>();
+
+            if(db.Database.EnsureCreated())
+            {
+                db.Departamentos.AddRange(Enumerable.Range(1, 10)
+                .Select(p => new Departamento
+                {
+                    Descricao = $"Departamento - {p}",
+                    Empregados = Enumerable.Range(1, 10)
+                    .Select(x => new Empregado
+                        {
+                            Nome = $"Empregado: {x}/{p}"
+                        }).ToList()
+                }));
+                
+                db.SaveChanges();
+            }
         }
     }
 }

@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Modulo4-Infraestrutura"
+    "\\Modulo3-Consultas",
+    "\\Modulo3-Consultas\\Consultas"
   ],
-  "SelectedNode": "\\Modulo4-Infraestrutura\\Modulo3.sln",
+  "SelectedNode": "\\Modulo3-Consultas\\Consultas\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
