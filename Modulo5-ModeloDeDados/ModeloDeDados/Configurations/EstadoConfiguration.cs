@@ -19,7 +19,7 @@ namespace Curso.Configuration
 
             builder
             .HasMany(p => p.Cidades)
-            .WithOne(p => p.Estado)
+            .WithOne(p => p.Estado);
             //.OnDelete(DeleteBehavior.Restrict);
         }
     }
